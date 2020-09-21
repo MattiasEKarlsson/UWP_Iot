@@ -8,9 +8,22 @@
     mc:Ignorable="d"
     Background ="DimGray">
 
-    <Grid Margin="10,10,0,0">
-        <Grid>
-            <Button Background="#FFB4B0B0"   x:Name="btnSend" Content="Press to send." Margin="0,495,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="btnSend_Click" FontSize="45" Height="76" Width="294"/>
-        </Grid>
+    <Grid>
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height = "600"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <Button Background="#FFB4B0B0" x:Name="btnSend" Content="Press to send." Margin="50,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="btnSend_Click" FontSize="45" Height="76" Width="294" RenderTransformOrigin="0.514,-2.156"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Padding="10,10,10,10">
+            <ListView x:Name="lvMessage" Margin="10,10,10,10" Padding="20,20,20,20" Height="550" Background="White" SelectionChanged="lbMessage_SelectionChanged"/>
+        </StackPanel>
+        
     </Grid>
+
+    
+
+
 </Page>

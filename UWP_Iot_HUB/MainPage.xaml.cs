@@ -34,12 +34,19 @@ namespace UWP_Iot_HUB
         private static readonly DeviceClient deviceClient =
             DeviceClient.CreateFromConnectionString(_conn, TransportType.Mqtt);
 
+
+
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
             DeviceService.SendMessageAsync(deviceClient).GetAwaiter();
             DeviceService.ReceiveMessageAsync(deviceClient).GetAwaiter();
+        }
 
-           
+        private void lbMessage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            
+            
         }
     }
 }

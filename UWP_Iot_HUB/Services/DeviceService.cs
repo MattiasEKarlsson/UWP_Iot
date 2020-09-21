@@ -13,16 +13,11 @@ namespace UWP_Iot_HUB.Services
 {
     public static class DeviceService
     {
-
+       
         public static async Task SendMessageAsync(DeviceClient deviceClient)
         {
-            var httpClient = HttpClientFactory.Create();
-
-            while (true)
-            {
-                double temp = 0;
-                int humidity = 0;
-                TemperatureModel senddata = new TemperatureModel();
+               var httpClient = HttpClientFactory.Create();
+               TemperatureModel senddata = new TemperatureModel();
 
                 try
                 {
@@ -34,8 +29,8 @@ namespace UWP_Iot_HUB.Services
                         var content = httpResponseMessage.Content;                                    //Hämtar Api
                         var datatemp = await content.ReadAsAsync<Rootobject>();
 
-                        temp = datatemp.current.temp;                                                // Sätter Temp och Humidity
-                        humidity = datatemp.current.humidity;
+                        double temp = datatemp.current.temp;                                                // Sätter Temp och Humidity
+                        int humidity = datatemp.current.humidity;
 
                         senddata = new TemperatureModel                                              //Lägger Temp och Humidity i samma objekt.
                         {
@@ -49,6 +44,9 @@ namespace UWP_Iot_HUB.Services
                 {
                     Console.WriteLine(ex.Message);
                 }
+
+
+
 
                 try
                 {
@@ -65,9 +63,9 @@ namespace UWP_Iot_HUB.Services
                     Console.WriteLine(exx.Message);
                 }
 
-                await Task.Delay(60 * 1000);
+                
 
-            }
+            
 
         }
 
@@ -81,8 +79,8 @@ namespace UWP_Iot_HUB.Services
                 {
                     continue;
                 }
-
-                Console.WriteLine($"Message recived {Encoding.UTF8.GetString(payload.GetBytes())}");
+                string newmessage = Encoding.UTF8.GetString(payload.GetBytes());
+                Console.WriteLine($"Message recived: {newmessage}");
                 await deviceClient.CompleteAsync(payload);
             }
 
